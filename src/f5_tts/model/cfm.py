@@ -37,7 +37,7 @@ class CFM(nn.Module):
         odeint_kwargs: dict = dict(
             # atol = 1e-5,
             # rtol = 1e-5,
-            method="euler"  # 'midpoint'
+            method="dopri5"  # 'midpoint'
         ),
         audio_drop_prob=0.3,
         cond_drop_prob=0.2,
