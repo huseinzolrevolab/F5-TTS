@@ -191,7 +191,7 @@ def load_checkpoint(model, ckpt_path, device: str, dtype=None, use_ema=True):
             and not torch.cuda.get_device_name().endswith("[ZLUDA]")
             else torch.float32
         )
-    model = model.to(dtype)
+    model = model.to(dtype).to(device)
 
     ckpt_type = ckpt_path.split(".")[-1]
     if ckpt_type == "safetensors":
@@ -263,7 +263,7 @@ def load_model(
             method=ode_method,
         ),
         vocab_char_map=vocab_char_map,
-    ).to(device)
+    )
 
     dtype = torch.float32 if mel_spec_type == "bigvgan" else None
     model = load_checkpoint(model, ckpt_path, device, dtype=dtype, use_ema=use_ema)
